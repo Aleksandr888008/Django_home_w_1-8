@@ -6,7 +6,3 @@ urlpatterns = [
     path('', home),
     path('contacts/', contacts),
     ]
-
-# urlpatterns = [
-#     path('', contacts)
-#     ]
