@@ -1,0 +1,34 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+{% load my_tags %}
+
+
+
+
+<div class="container">
+    <div class="col-12 mb-5">
+    <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Добавить блог</a>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        {% for object in object_list %}
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">{{object|title}}</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="card-footer">
+                            <a class="btn btn-link" href="{% url 'blog:view' object.pk %}">View</a>
+                            <a class="btn btn-link" href="{% url 'blog:edit' object.pk %}">Edit</a>
+                            <a class="btn btn-link" href="{% url 'blog:delete' object.pk %}">Delete</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
