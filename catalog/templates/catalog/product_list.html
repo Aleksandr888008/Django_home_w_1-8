@@ -3,12 +3,13 @@
 {% load my_tags %}
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Магазин</h1>
-    <p class="lead">Всё для вашего автомобиля!</p>
+    <h1 class="display-4">Каталог</h1>
 </div>
 
 <div class="container">
-
+    <div class="col-12 mb-5">
+        <a class="btn btn-outline-primary" href="{% url 'catalog:create_product' %}">Добавить товар</a>
+    </div>
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
         {% for object in object_list %}
             <div class="col">
@@ -25,7 +26,16 @@
                             <li>{{object.category}}</li>
                             <li>{{object.date_create}}</li>
                             <li>{{object.date_change}}</li>
+                            {% for version in product.version_set.all %}
+                                {% if version.is_active %}
+                                    <p class="card-text">Версия: {{ version.version_name }} </p>
+                                    <p class="card-text">Номер версии: {{ version.version_number }} </p>
+                                {% endif %}
+                            {% endfor %}
                         </ul>
+                        <a href="{% url 'catalog:detail_product' object.pk %}" type="button" class="btn btn-lg btn-block btn-outline-primary">Просмотр</a>
+                        <a href="{% url 'catalog:update_product' object.pk %}" type="button" class="btn btn-lg btn-block btn-outline-primary">Изменить</a>
+                        <a href="{% url 'catalog:delete_product' object.pk %}" type="button" class="btn btn-lg btn-block btn-outline-primary">Удалить</a>
                     </div>
                 </div>
             </div>

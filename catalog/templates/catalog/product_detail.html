@@ -1,0 +1,34 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+{% load my_tags %}
+    <div class="row text-center">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <img src="{{ object.image|mediapath }}"/>
+                        <tr>
+                            <td><h5>Наименование товара: {{ object.name }}</h5></td>
+                        </tr>
+                        <tr>
+                            <td><h5>Описание:  {{ object.description }}</h5></td>
+                        </tr>
+
+                        <tr>
+                            <td><h5>Цена: {{ object.price }} $</h5></td>
+                        </tr>
+                    </table>
+                    <div class="d-grid gap-2 col-3 mx-auto">
+                        <a href="{% url 'catalog:delete_product' product.pk %}" class="btn btn-outline-danger btn-lg">
+                            Удалить</a>
+                        <a href="{% url 'catalog:update_product' product.pk %}" class="btn btn-outline-warning btn-lg">
+                            Редактировать</a>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'catalog:list_product' %}"  type="button" class="btn btn-danger"> Назад </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
