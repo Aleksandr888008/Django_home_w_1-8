@@ -7,7 +7,7 @@ from catalog.views import contacts, ProductListView, ProductCreateView, ProductU
 app_name = CatalogConfig.name
 urlpatterns = [
     path('', home, name='home'),
-    path('product/', ProductListView.as_view(), name='list_product'),
+    path('product/', ProductListView.as_view(), name='product_list'),
     path('contacts/', contacts, name='contacts'),
     path('create/', ProductCreateView.as_view(), name='create_product'),
     path('update/<int:pk>/', ProductUpdateView.as_view(), name='update_product'),

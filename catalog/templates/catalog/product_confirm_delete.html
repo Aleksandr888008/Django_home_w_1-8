@@ -9,7 +9,7 @@
                     {% csrf_token %}
                     Уверены, что хотите удалить карточку товара <h4>"{{ object }}"?</h4><br>
                     <input type="submit" class="btn btn-outline-danger" value="Уверен">
-                    <a href="{% url 'catalog:list_product' %}" class="btn btn-white btn-secondary btn-lg"> Назад </a>
+                    <a href="{% url 'catalog:product_list' %}" class="btn btn-white btn-secondary btn-lg"> Назад </a>
                 </form>
             </div>
         </div>
