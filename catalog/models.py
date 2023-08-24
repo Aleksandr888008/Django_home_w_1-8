@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.conf import settings
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -12,6 +13,8 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='цена')
     date_create = models.DateTimeField(verbose_name='дата создания')
     date_change = models.DateTimeField(verbose_name='дата последнего изменения')
+
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='добавил товар', **NULLABLE)
 
     def __str__(self):
         return f'{self.name}, {self.price}, {self.category}'

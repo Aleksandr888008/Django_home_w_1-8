@@ -25,7 +25,6 @@ class ProductListView(ListView):
     }
 
     def get_queryset(self):
-
         queryset = super().get_queryset()
         queryset = queryset.prefetch_related('version_set')
         return queryset
@@ -35,6 +34,13 @@ class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product_list')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
+
+        return super().form_valid(form)
 
 
 class ProductUpdateView(UpdateView):
@@ -69,7 +75,6 @@ class ProductsDetailView(DetailView):
         context_data = super().get_context_data(**kwargs)
         context_data['title'] = context_data['object']
         return context_data
-
 
 
 class ProductsDeleteView(DeleteView):

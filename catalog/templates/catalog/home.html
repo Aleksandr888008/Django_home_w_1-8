@@ -6,7 +6,7 @@
     <h1 class="display-4">Магазин</h1>
     <p class="lead">Всё для вашего автомобиля!</p>
 </div>
-
+{% if user.is_authenticated %}
 <div class="container">
 
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
@@ -32,5 +32,5 @@
         {% endfor %}
     </div>
 </div>
-
+{% endif %}
 {% endblock %}
