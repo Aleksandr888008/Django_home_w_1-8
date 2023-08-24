@@ -5,7 +5,7 @@
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">Каталог</h1>
 </div>
-
+{% if user.is_authenticated %}
 <div class="container">
     <div class="col-12 mb-5">
         <a class="btn btn-outline-primary" href="{% url 'catalog:create_product' %}">Добавить товар</a>
@@ -26,7 +26,8 @@
                             <li>{{object.category}}</li>
                             <li>{{object.date_create}}</li>
                             <li>{{object.date_change}}</li>
-                            {% for version in product.version_set.all %}
+                            <li>{{object.owner|default:"без регистрации"}}</li>
+                            {% for version in object.version_set.all %}
                                 {% if version.is_active %}
                                     <p class="card-text">Версия: {{ version.version_name }} </p>
                                     <p class="card-text">Номер версии: {{ version.version_number }} </p>
@@ -42,5 +43,5 @@
         {% endfor %}
     </div>
 </div>
-
+{% endif %}
 {% endblock %}
