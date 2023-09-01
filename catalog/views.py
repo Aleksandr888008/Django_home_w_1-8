@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -6,6 +5,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Version
+from catalog.services import get_categories_cache
 
 
 def home(request):
@@ -28,6 +28,14 @@ class ProductListView(ListView):
         queryset = super().get_queryset()
         queryset = queryset.prefetch_related('version_set')
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['category_list'] = get_categories_cache()
+        context_data['category'] = context_data['category_list'].get(pk=self.kwargs.get('pk')) if self.kwargs.get(
+            'pk') else ''
+
+        return context_data
 
 
 class ProductCreateView(CreateView):
